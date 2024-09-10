@@ -30,6 +30,7 @@ public class Grid {
         }
         return builder.toString();
     }
+
     public void nextGen() {
         int[][] newField = new int[field.length][field[0].length];
 
@@ -38,8 +39,7 @@ public class Grid {
             for (int x = 0; x < field[y].length; x++) {
                 if (field[y][x] == 1) {
                     newField[y][x] = 1;
-                }
-                else {
+                } else {
                     newField[y][x] = 0;
                 }
             }
@@ -84,17 +84,17 @@ public class Grid {
                     totalNeighbors++;
                 }
 
-                //check rules
-                //A live cell dies if it has fewer than two live neighbors.
+                /*
+                check rules:
+                A live cell dies if it has fewer than two live neighbors.
+                A live cell with more than three live neighbors dies.
+                A dead cell will be brought back to live if it has exactly three live neighbors.
+                 */
                 if (totalNeighbors < 2 && newField[y][x] == 1) {
                     field[y][x] = 0;
-                }
-                //A live cell with more than three live neighbors dies.
-                else if (totalNeighbors > 3 && newField[y][x] == 1) {
+                } else if (totalNeighbors > 3 && newField[y][x] == 1) {
                     field[y][x] = 0;
-                }
-                //A dead cell will be brought back to live if it has exactly three live neighbors.
-                else if (totalNeighbors == 3 && newField[y][x] == 0) {
+                } else if (totalNeighbors == 3 && newField[y][x] == 0) {
                     field[y][x] = 1;
                 }
 
