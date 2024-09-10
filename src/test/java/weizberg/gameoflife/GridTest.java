@@ -36,14 +36,13 @@ public class GridTest {
         Grid grid = new Grid(3, 3);
 
         //when
-        grid.makeAlive(0, 0);
-        grid.makeAlive(2, 0);
+        grid.makeAlive(0, 1);
         grid.makeAlive(1, 1);
-        grid.makeAlive(0, 2);
-        grid.makeAlive(1, 2);
+        grid.makeAlive(2, 1);
         grid.nextGen();
 
         //then
-        assertEquals("010\n001\n110\n", grid.toString());
+        assertEquals("010\n010\n010\n", grid.toString());
     }
 }
+

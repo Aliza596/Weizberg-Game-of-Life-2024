@@ -37,11 +37,7 @@ public class Grid {
         //copy the original field
         for (int y = 0; y < field.length; y++) {
             for (int x = 0; x < field[y].length; x++) {
-                if (field[y][x] == 1) {
-                    newField[y][x] = 1;
-                } else {
-                    newField[y][x] = 0;
-                }
+                newField[y][x] = field[y][x];
             }
         }
 
@@ -90,11 +86,11 @@ public class Grid {
                 A live cell with more than three live neighbors dies.
                 A dead cell will be brought back to live if it has exactly three live neighbors.
                  */
-                if (totalNeighbors < 2 && newField[y][x] == 1) {
+                if (totalNeighbors < 2) {
                     field[y][x] = 0;
-                } else if (totalNeighbors > 3 && newField[y][x] == 1) {
+                } else if (totalNeighbors > 3) {
                     field[y][x] = 0;
-                } else if (totalNeighbors == 3 && newField[y][x] == 0) {
+                } else if (totalNeighbors == 3) {
                     field[y][x] = 1;
                 }
 
