@@ -68,25 +68,25 @@ public class GridComponent extends JComponent {
         super.paintComponent(g);
 
         field = grid.getField();
-        int rows = field.length;
-        int cols = field[0].length;
 
         g.setColor(Color.white);
 
-        for (int i = 0; i <= getWidth(); i+= 20) {
+        for (int i = 0; i <= getWidth(); i += 20) {
             g.drawLine(i, 0, i, getHeight());
         }
 
-        for (int i = 0; i <= getHeight(); i+=20) {
+        for (int i = 0; i <= getHeight(); i += 20) {
             g.drawLine(0, i, getWidth(), i);
         }
 
         g.setColor(Color.MAGENTA);
 
+        int rows = field.length;
+        int cols = field[0].length;
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < cols; x++) {
                 if (grid.isAlive(x, y)) {
-                    g.fillRect(x * 20 , y * 20, 20, 20);
+                    g.fillRect(x * 20, y * 20, 20, 20);
                 }
             }
         }

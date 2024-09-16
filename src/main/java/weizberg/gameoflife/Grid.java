@@ -19,7 +19,7 @@ public class Grid {
         field[y][x] = 1;
     }
 
-    public void makeDead (int x, int y) {
+    public void makeDead(int x, int y) {
         field[y][x] = 0;
     }
 
