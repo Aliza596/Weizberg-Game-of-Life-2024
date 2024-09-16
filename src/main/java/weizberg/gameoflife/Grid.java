@@ -19,6 +19,10 @@ public class Grid {
         field[y][x] = 1;
     }
 
+    public void makeDead (int x, int y) {
+        field[y][x] = 0;
+    }
+
     public String toString() {
         StringBuilder builder = new StringBuilder();
 
@@ -96,5 +100,16 @@ public class Grid {
 
             }
         }
+    }
+
+    public boolean isAlive(int x, int y) {
+        if (field[y][x] == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    public int[][] getField() {
+        return field;
     }
 }
