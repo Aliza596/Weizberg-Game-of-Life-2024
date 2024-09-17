@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.lang.Math;
 import java.util.Arrays;
 
 public class GridComponent extends JComponent {
@@ -93,12 +92,16 @@ public class GridComponent extends JComponent {
         repaint();
     }
 
-    public void nextGeneration() {
+    public void playButtonMethod() {
         timer.start();
     }
 
     public void pauseButtonMethod() {
         timer.stop();
+    }
+
+    public void nextGenMethod() {
+        grid.nextGen();
     }
 
     public void clearButtonMethod() {

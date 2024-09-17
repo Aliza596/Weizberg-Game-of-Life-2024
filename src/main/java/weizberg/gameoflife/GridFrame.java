@@ -2,10 +2,6 @@ package weizberg.gameoflife;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class GridFrame extends JFrame {
 
@@ -26,11 +22,15 @@ public class GridFrame extends JFrame {
 
         JButton playButton = new JButton("Play");
         buttonPanel.add(playButton);
-        playButton.addActionListener(e -> gridComponent.nextGeneration());
+        playButton.addActionListener(e -> gridComponent.playButtonMethod());
 
         JButton pauseButton = new JButton("Pause");
         buttonPanel.add(pauseButton);
         pauseButton.addActionListener(e -> gridComponent.pauseButtonMethod());
+
+        JButton nextButton = new JButton("Next");
+        buttonPanel.add(nextButton);
+        nextButton.addActionListener(e -> gridComponent.nextGenMethod());
 
         JButton clearButton = new JButton("Clear");
         buttonPanel.add(clearButton);
