@@ -15,6 +15,7 @@ public class GridComponent extends JComponent {
         @Override
         public void actionPerformed(ActionEvent e) {
             grid.nextGen();
+            repaint();
         }
     });
 
@@ -31,13 +32,7 @@ public class GridComponent extends JComponent {
                 } else {
                     grid.makeAlive(gridX, gridY);
                 }
-                for (int y = 0; y < getWidth(); y++) {
-                    for (int x = 0; x < getHeight(); x++) {
-                        if (grid.isAlive(x, y)) {
-                            System.out.println(x + ", " + y + " is alive");
-                        }
-                    }
-                }
+                repaint();
             }
 
             @Override
@@ -89,7 +84,6 @@ public class GridComponent extends JComponent {
                 }
             }
         }
-        repaint();
     }
 
     public void playButtonMethod() {
@@ -102,11 +96,13 @@ public class GridComponent extends JComponent {
 
     public void nextGenMethod() {
         grid.nextGen();
+        repaint();
     }
 
     public void clearButtonMethod() {
         for (int y = 0; y < field.length; y++) {
             Arrays.fill(field[y], 0);
         }
+        repaint();
     }
 }
