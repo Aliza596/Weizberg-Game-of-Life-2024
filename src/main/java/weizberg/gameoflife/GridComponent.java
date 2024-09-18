@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class GridComponent extends JComponent {
     private final Grid grid;
     private int[][] field;
-    Timer timer = new Timer(1000, new ActionListener() {
+    private Timer timer = new Timer(1000, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             grid.nextGen();
