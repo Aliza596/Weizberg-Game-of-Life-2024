@@ -4,5 +4,5 @@ Conway's Game of Life is a cellular automation game which runs on its own based 
 the configuration of cells. 
 [Wiki](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
 
-![fallingSand](screenshots/img.png) 
+![gameOfLife](screenshots/img.png) 
 
