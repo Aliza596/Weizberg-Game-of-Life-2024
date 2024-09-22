@@ -1,27 +1,31 @@
 package weizberg.gameoflife;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Scanner;
 
-public class RLEParser {
+public class RleParser {
     private final String file;
     Grid grid;
 
-    public RLEParser(Path fileName, int width, int height) throws IOException {
+    public RleParser(Path fileName, int width, int height) throws IOException {
         file = Files.readString(fileName);
         grid = new Grid(width, height);
     }
 
     public Grid parse() {
         char letter;
-        String strWidth, strHeight, strNum, line, title, comment = "";
-        int height, width;
+        String strWidth;
+        String strHeight;
+        String strNum;
+        String line;
+        String title;
+        String comment = "";
+        int height;
+        int width;
         int numOfSpaces = 1;
-        int x = 0, y = 0;
+        int x = 0;
+        int y = 0;
         String [] lines = file.split("\n");
 
         for (int j = 0; j < lines.length; j++) {
@@ -56,7 +60,7 @@ public class RLEParser {
                     if (Character.isDigit(nextLetter)) {
                         strNum = letter + Character.toString(nextLetter);
                         numOfSpaces = Integer.parseInt(strNum);
-                        i ++;
+                        i++;
                     } else {
                         numOfSpaces = Integer.parseInt(Character.toString(letter));
                     }

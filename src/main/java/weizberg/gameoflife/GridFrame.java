@@ -17,10 +17,6 @@ public class GridFrame extends JFrame {
         setLayout(new BorderLayout());
 
         Grid grid = new Grid(300, 400);
-//        Path filePath = Path.of("C:\\Users\\weizb\\IdeaProjects\\Weizberg-Game-of-Life-2024\\src\\main\\java\\weizberg\\gameoflife\\files\\gosper glider gun");
-//        RLEParser rleParser = new RLEParser(filePath, 300, 400);
-//        Grid grid = rleParser.parse();
-
 
         GridComponent gridComponent = new GridComponent(grid);
         gridComponent.setBackground(Color.BLACK);

@@ -112,17 +112,22 @@ public class GridComponent extends JComponent {
         Path filePath = null;
         switch (option) {
             case "Glider":
-                filePath = Path.of("C:\\Users\\weizb\\IdeaProjects\\Weizberg-Game-of-Life-2024\\src\\main\\java\\weizberg\\gameoflife\\files\\glider");
+                filePath = Path.of(
+                        "C:\\Users\\weizb\\IdeaProjects\\Weizberg-Game-of-Life-2024\\src\\main\\java\\weizberg\\gameoflife\\files\\glider");
                 break;
             case "Glider gun":
-                filePath = Path.of("C:\\Users\\weizb\\IdeaProjects\\Weizberg-Game-of-Life-2024\\src\\main\\java\\weizberg\\gameoflife\\files\\gosper glider gun");
+                filePath = Path.of(
+                        "C:\\Users\\weizb\\IdeaProjects\\Weizberg-Game-of-Life-2024\\src\\main\\java\\weizberg\\gameoflife\\files\\gosper glider gun");
                 break;
             case "Spider":
-                filePath = Path.of("C:\\Users\\weizb\\IdeaProjects\\Weizberg-Game-of-Life-2024\\src\\main\\java\\weizberg\\gameoflife\\files\\quadpole");
+                filePath = Path.of(
+                        "C:\\Users\\weizb\\IdeaProjects\\Weizberg-Game-of-Life-2024\\src\\main\\java\\weizberg\\gameoflife\\files\\quadpole");
                 break;
 
+            default:
+                throw new IllegalStateException("Unexpected value: " + option);
         }
-        RLEParser rleParser = new RLEParser(filePath, 300, 400);
+        RleParser rleParser = new RleParser(filePath, 300, 400);
         grid = rleParser.parse();
         repaint();
     }

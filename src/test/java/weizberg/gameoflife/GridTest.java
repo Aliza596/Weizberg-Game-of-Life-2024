@@ -51,8 +51,9 @@ public class GridTest {
     @Test
     public void parse() throws IOException {
         //given
-        Path filePath = Path.of("C:\\Users\\weizb\\IdeaProjects\\Weizberg-Game-of-Life-2024\\src\\main\\java\\weizberg\\gameoflife\\glider");
-        RLEParser rleParser = new RLEParser(filePath, 3, 3);
+        Path filePath = Path.of(
+                "C:\\Users\\weizb\\IdeaProjects\\Weizberg-Game-of-Life-2024\\src\\main\\java\\weizberg\\gameoflife\\glider");
+        RleParser rleParser = new RleParser(filePath, 3, 3);
 
         //when
         Grid grid = rleParser.parse();
