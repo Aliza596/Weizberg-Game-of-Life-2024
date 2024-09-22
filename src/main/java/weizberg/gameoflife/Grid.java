@@ -15,6 +15,14 @@ public class Grid {
         this.height = height;
     }
 
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
     public void makeAlive(int x, int y) {
         field[y][x] = 1;
     }

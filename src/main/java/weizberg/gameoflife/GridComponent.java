@@ -6,10 +6,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Arrays;
 
 public class GridComponent extends JComponent {
-    private final Grid grid;
+    private Grid grid;
     private int[][] field;
     private Timer timer = new Timer(1000, new ActionListener() {
         @Override
@@ -103,6 +105,25 @@ public class GridComponent extends JComponent {
         for (int y = 0; y < field.length; y++) {
             Arrays.fill(field[y], 0);
         }
+        repaint();
+    }
+
+    public void optionsButton(String option) throws IOException {
+        Path filePath = null;
+        switch (option) {
+            case "Glider":
+                filePath = Path.of("C:\\Users\\weizb\\IdeaProjects\\Weizberg-Game-of-Life-2024\\src\\main\\java\\weizberg\\gameoflife\\files\\glider");
+                break;
+            case "Glider gun":
+                filePath = Path.of("C:\\Users\\weizb\\IdeaProjects\\Weizberg-Game-of-Life-2024\\src\\main\\java\\weizberg\\gameoflife\\files\\gosper glider gun");
+                break;
+            case "Spider":
+                filePath = Path.of("C:\\Users\\weizb\\IdeaProjects\\Weizberg-Game-of-Life-2024\\src\\main\\java\\weizberg\\gameoflife\\files\\quadpole");
+                break;
+
+        }
+        RLEParser rleParser = new RLEParser(filePath, 300, 400);
+        grid = rleParser.parse();
         repaint();
     }
 }
