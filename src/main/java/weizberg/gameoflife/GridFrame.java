@@ -3,6 +3,7 @@ package weizberg.gameoflife;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -52,6 +53,8 @@ public class GridFrame extends JFrame {
                 gridComponent.optionsButton("Glider");
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
+            } catch (URISyntaxException ex) {
+                throw new RuntimeException(ex);
             }
         });
 
@@ -62,6 +65,8 @@ public class GridFrame extends JFrame {
                 gridComponent.optionsButton("Glider gun");
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
+            } catch (URISyntaxException ex) {
+                throw new RuntimeException(ex);
             }
         });
 
@@ -71,6 +76,8 @@ public class GridFrame extends JFrame {
             try {
                 gridComponent.optionsButton("Spider");
             } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            } catch (URISyntaxException ex) {
                 throw new RuntimeException(ex);
             }
         });

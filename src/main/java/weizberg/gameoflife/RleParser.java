@@ -1,5 +1,6 @@
 package weizberg.gameoflife;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -9,7 +10,8 @@ public class RleParser {
     Grid grid;
 
     public RleParser(Path fileName, int width, int height) throws IOException {
-        file = Files.readString(fileName);
+        File filePath = fileName.toFile();
+        file = Files.readString(filePath.toPath());
         grid = new Grid(width, height);
     }
 
