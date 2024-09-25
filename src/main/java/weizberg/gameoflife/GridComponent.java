@@ -114,13 +114,13 @@ public class GridComponent extends JComponent {
         Path p = null;
         switch (option) {
             case "Glider":
-                p = Paths.get(ClassLoader.getSystemResource("glider.rle").toURI());
+                p = Paths.get(ClassLoader.getSystemResource("gliderFile.rle").toURI());
                 break;
             case "Glider gun":
-                p = Paths.get(ClassLoader.getSystemResource("gosperGliderGun.rle").toURI());
+                p = Paths.get(ClassLoader.getSystemResource("gun.rle").toURI());
                 break;
             case "Spider":
-                p = Paths.get(ClassLoader.getSystemResource("spider.rle").toURI());
+                p = Paths.get(ClassLoader.getSystemResource("spiderFile.rle").toURI());
                 break;
 
             default:

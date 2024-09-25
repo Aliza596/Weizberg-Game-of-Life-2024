@@ -53,7 +53,7 @@ public class GridTest {
     @Test
     public void parse() throws IOException, URISyntaxException {
         //given
-        Path p = Paths.get(ClassLoader.getSystemResource("glider.rle").toURI());
+        Path p = Paths.get(ClassLoader.getSystemResource("gliderFile.rle").toURI());
         RleParser rleParser = new RleParser(p, 3, 3);
 
         //when
