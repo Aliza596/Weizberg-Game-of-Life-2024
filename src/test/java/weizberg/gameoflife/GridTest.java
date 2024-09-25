@@ -2,8 +2,12 @@ package weizberg.gameoflife;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -49,11 +53,10 @@ public class GridTest {
     }
 
     @Test
-    public void parse() throws IOException {
+    public void parse() throws IOException, URISyntaxException {
         //given
-        Path filePath = Path.of(
-                "C:\\Users\\weizb\\IdeaProjects\\Weizberg-Game-of-Life-2024\\src\\main\\java\\weizberg\\gameoflife\\glider");
-        RleParser rleParser = new RleParser(filePath, 3, 3);
+        Path p = Paths.get(ClassLoader.getSystemResource("glider").toURI());
+        RleParser rleParser = new RleParser(p, 3, 3);
 
         //when
         Grid grid = rleParser.parse();

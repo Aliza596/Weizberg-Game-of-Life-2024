@@ -112,7 +112,6 @@ public class GridComponent extends JComponent {
     }
 
     public void optionsButton(String option) throws IOException, URISyntaxException {
-        File filePath = null;
         Path p = null;
         switch (option) {
             case "Glider":
