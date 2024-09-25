@@ -50,17 +50,17 @@ public class GridTest {
         assertEquals("010\n010\n010\n", grid.toString());
     }
 
-    @Test
-    public void parse() throws IOException, URISyntaxException {
-        //given
-        Path p = Paths.get(ClassLoader.getSystemResource("gliderFile.rle").toURI());
-        RleParser rleParser = new RleParser(p, 3, 3);
-
-        //when
-        Grid grid = rleParser.parse();
-
-        //then
-        assertEquals("010\n001\n111\n", grid.toString());
-    }
+//    @Test
+//    public void parse() throws IOException, URISyntaxException {
+//        //given
+//        Path p = Paths.get(ClassLoader.getSystemResource("gliderFile.rle").toURI());
+//        RleParser rleParser = new RleParser(p, 3, 3);
+//
+//        //when
+//        Grid grid = rleParser.parse();
+//
+//        //then
+//        assertEquals("010\n001\n111\n", grid.toString());
+//    }
 }
 

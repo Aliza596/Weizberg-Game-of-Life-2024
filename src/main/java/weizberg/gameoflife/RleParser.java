@@ -11,7 +11,7 @@ public class RleParser {
 
     public RleParser(Path fileName, int width, int height) throws IOException {
         File filePath = fileName.toFile();
-        file = Files.readString(filePath.toPath());
+        file = Files.readString(fileName);
         grid = new Grid(width, height);
     }
 
