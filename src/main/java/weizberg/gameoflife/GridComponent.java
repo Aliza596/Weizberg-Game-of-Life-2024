@@ -6,10 +6,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 
 public class GridComponent extends JComponent {
-    private final Grid grid;
+    private Grid grid;
     private int[][] field;
     private Timer timer = new Timer(1000, new ActionListener() {
         @Override
@@ -103,6 +107,27 @@ public class GridComponent extends JComponent {
         for (int y = 0; y < field.length; y++) {
             Arrays.fill(field[y], 0);
         }
+        repaint();
+    }
+
+    public void optionsButton(String option) throws IOException, URISyntaxException {
+        Path p = null;
+        switch (option) {
+            case "Glider":
+                p = Paths.get(ClassLoader.getSystemResource("gliderFile.rle").toURI());
+                break;
+            case "Glider gun":
+                p = Paths.get(ClassLoader.getSystemResource("gun.rle").toURI());
+                break;
+            case "Spider":
+                p = Paths.get(ClassLoader.getSystemResource("spiderFile.rle").toURI());
+                break;
+
+            default:
+                throw new IllegalStateException("Unexpected value: " + option);
+        }
+        RleParser rleParser = new RleParser(p, 300, 400);
+        grid = rleParser.parse();
         repaint();
     }
 }

@@ -2,6 +2,11 @@ package weizberg.gameoflife;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GridTest {
@@ -44,5 +49,18 @@ public class GridTest {
         //then
         assertEquals("010\n010\n010\n", grid.toString());
     }
+
+//    @Test
+//    public void parse() throws IOException, URISyntaxException {
+//        //given
+//        Path p = Paths.get(ClassLoader.getSystemResource("gliderFile.rle").toURI());
+//        RleParser rleParser = new RleParser(p, 3, 3);
+//
+//        //when
+//        Grid grid = rleParser.parse();
+//
+//        //then
+//        assertEquals("010\n001\n111\n", grid.toString());
+//    }
 }
 
