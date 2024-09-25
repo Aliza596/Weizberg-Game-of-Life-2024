@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
@@ -115,13 +114,13 @@ public class GridComponent extends JComponent {
         Path p = null;
         switch (option) {
             case "Glider":
-                p = Paths.get(ClassLoader.getSystemResource("glider").toURI());
+                p = Paths.get(ClassLoader.getSystemResource("glider.rle").toURI());
                 break;
             case "Glider gun":
-                p = Paths.get(ClassLoader.getSystemResource("gosperGliderGun").toURI());
+                p = Paths.get(ClassLoader.getSystemResource("gosperGliderGun.rle").toURI());
                 break;
             case "Spider":
-                p = Paths.get(ClassLoader.getSystemResource("spider").toURI());
+                p = Paths.get(ClassLoader.getSystemResource("spider.rle").toURI());
                 break;
 
             default:

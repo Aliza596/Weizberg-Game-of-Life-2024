@@ -2,10 +2,8 @@ package weizberg.gameoflife;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -55,7 +53,7 @@ public class GridTest {
     @Test
     public void parse() throws IOException, URISyntaxException {
         //given
-        Path p = Paths.get(ClassLoader.getSystemResource("glider").toURI());
+        Path p = Paths.get(ClassLoader.getSystemResource("glider.rle").toURI());
         RleParser rleParser = new RleParser(p, 3, 3);
 
         //when
