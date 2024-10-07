@@ -120,4 +120,8 @@ public class Grid {
     public int[][] getField() {
         return field;
     }
+
+    public void setField(int[][] fieldToBeCopied) {
+        field = fieldToBeCopied;
+    }
 }

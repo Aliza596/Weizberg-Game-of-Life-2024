@@ -22,6 +22,8 @@ public class GridFrame extends JFrame {
         GridComponent gridComponent = new GridComponent(grid);
         gridComponent.setBackground(Color.BLACK);
         add(gridComponent, BorderLayout.CENTER);
+        JScrollPane scrollPane = new JScrollPane(gridComponent);
+        add(scrollPane, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel();
         add(buttonPanel, BorderLayout.SOUTH);
@@ -42,45 +44,9 @@ public class GridFrame extends JFrame {
         buttonPanel.add(clearButton);
         clearButton.addActionListener(e -> gridComponent.clearButtonMethod());
 
-
-        JPanel optionsPanel = new JPanel();
-        add(optionsPanel, BorderLayout.EAST);
-
-        JButton gliderButton = new JButton("Glider");
-        optionsPanel.add(gliderButton);
-        gliderButton.addActionListener(e -> {
-            try {
-                gridComponent.optionsButton("Glider");
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            } catch (URISyntaxException ex) {
-                throw new RuntimeException(ex);
-            }
-        });
-
-        JButton gliderGunButton = new JButton("Glider Gun");
-        optionsPanel.add(gliderGunButton);
-        gliderGunButton.addActionListener(e -> {
-            try {
-                gridComponent.optionsButton("Glider gun");
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            } catch (URISyntaxException ex) {
-                throw new RuntimeException(ex);
-            }
-        });
-
-        JButton quadPoleButton = new JButton("Spider");
-        optionsPanel.add(quadPoleButton);
-        quadPoleButton.addActionListener(e -> {
-            try {
-                gridComponent.optionsButton("Spider");
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            } catch (URISyntaxException ex) {
-                throw new RuntimeException(ex);
-            }
-        });
+        JButton copiedButton = new JButton("Paste");
+        add(copiedButton, BorderLayout.EAST);
+        copiedButton.addActionListener(e -> gridComponent.copiedButton());
     }
 
 
