@@ -50,17 +50,29 @@ public class GridTest {
         assertEquals("010\n010\n010\n", grid.toString());
     }
 
-//    @Test
-//    public void parse() throws IOException, URISyntaxException {
-//        //given
-//        Path p = Paths.get(ClassLoader.getSystemResource("gliderFile.rle").toURI());
-//        RleParser rleParser = new RleParser(p, 3, 3);
-//
-//        //when
-//        Grid grid = rleParser.parse();
-//
-//        //then
-//        assertEquals("010\n001\n111\n", grid.toString());
-//    }
+    @Test
+    public void parse() throws IOException, URISyntaxException {
+        //given
+        final RleParser rleParser = new RleParser();
+
+
+        //when
+        int[][] expectedField = new int[100][100];
+        expectedField[49][50] = 1;
+        expectedField[50][51] = 1;
+        expectedField[51][49] = 1;
+        expectedField[51][50] = 1;
+        expectedField[51][51] = 1;
+        String text = "#C This is a glider.\n x = 3, y = 3 \n bo$2bo$3o!";
+        int[][] field = rleParser.parse(text);
+
+
+        //then
+        for (int y = 0; y < field.length; y++) {
+            for (int x = 0; x < field[y].length; x++) {
+                assertEquals(expectedField[y][x], field[y][x]);
+            }
+        }
+    }
 }
 

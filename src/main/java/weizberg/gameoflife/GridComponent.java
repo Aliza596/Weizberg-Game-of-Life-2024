@@ -6,10 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Arrays;
 
 public class GridComponent extends JComponent {
@@ -69,11 +65,12 @@ public class GridComponent extends JComponent {
 
         g.setColor(Color.white);
 
-        for (int i = 0; i <= getWidth(); i += 20) {
+        int cellSize = 10;
+        for (int i = 0; i <= getWidth(); i += cellSize) {
             g.drawLine(i, 0, i, getHeight());
         }
 
-        for (int i = 0; i <= getHeight(); i += 20) {
+        for (int i = 0; i <= getHeight(); i += cellSize) {
             g.drawLine(0, i, getWidth(), i);
         }
 
@@ -84,7 +81,7 @@ public class GridComponent extends JComponent {
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < cols; x++) {
                 if (grid.isAlive(x, y)) {
-                    g.fillRect(x * 20, y * 20, 20, 20);
+                    g.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
                 }
             }
         }
@@ -110,24 +107,9 @@ public class GridComponent extends JComponent {
         repaint();
     }
 
-    public void optionsButton(String option) throws IOException, URISyntaxException {
-        Path p = null;
-        switch (option) {
-            case "Glider":
-                p = Paths.get(ClassLoader.getSystemResource("gliderFile.rle").toURI());
-                break;
-            case "Glider gun":
-                p = Paths.get(ClassLoader.getSystemResource("gun.rle").toURI());
-                break;
-            case "Spider":
-                p = Paths.get(ClassLoader.getSystemResource("spiderFile.rle").toURI());
-                break;
-
-            default:
-                throw new IllegalStateException("Unexpected value: " + option);
-        }
-        RleParser rleParser = new RleParser(p, 300, 400);
-        grid = rleParser.parse();
+    public void copiedButton() {
+        RleParser rleParser = new RleParser();
+        grid.setField(rleParser.parse(rleParser.readCopiedText()));
         repaint();
     }
 }
