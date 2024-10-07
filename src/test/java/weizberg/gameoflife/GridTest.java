@@ -57,18 +57,17 @@ public class GridTest {
 
         //when
         String text = "#C This is a glider.\n x = 3, y = 3 \n bo$2bo$3o!";
-        int[][] field = rleParser.parse(text);
         int[][] expectedField = new int[100][100];
         expectedField[49][50] = 1;
         expectedField[50][51] = 1;
         expectedField[51][49] = 1;
         expectedField[51][50] = 1;
         expectedField[51][51] = 1;
+        int[][] field = rleParser.parse(text);
 
         //then
         for (int y = 0; y < field.length; y++) {
             for (int x = 0; x < field[y].length; x++) {
-                System.out.println("[" + y + "],[" + x + "]\nField: " + field[y][x] + "\n" + "Expected: " + expectedField[y][x]);
                 assertEquals(expectedField[y][x], field[y][x]);
             }
         }

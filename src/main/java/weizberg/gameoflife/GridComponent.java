@@ -6,10 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Arrays;
 
 public class GridComponent extends JComponent {
@@ -69,8 +65,6 @@ public class GridComponent extends JComponent {
 
         g.setColor(Color.white);
 
-//        int cellSize = Math.min(getWidth() / 100, getHeight() / 100);
-
         int cellSize = 10;
         for (int i = 0; i <= getWidth(); i += cellSize) {
             g.drawLine(i, 0, i, getHeight());
@@ -115,7 +109,7 @@ public class GridComponent extends JComponent {
 
     public void copiedButton() {
         RleParser rleParser = new RleParser();
-        grid.setField(rleParser.parse(rleParser.readFile()));
+        grid.setField(rleParser.parse(rleParser.readCopiedText()));
         repaint();
     }
 }

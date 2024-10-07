@@ -1,20 +1,19 @@
 package weizberg.gameoflife;
 
 import java.awt.*;
-import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.regex.Pattern;
+
 import org.apache.commons.io.IOUtils;
 
 public class RleParser {
@@ -29,8 +28,7 @@ public class RleParser {
         field = new int[xVal][yVal];
     }
 
-    public String readFile() {
-        String file = "";
+    public String readCopiedText() {
         String clipboardText = "";
 
         try {
@@ -43,8 +41,9 @@ public class RleParser {
 
 
         //if the copied text is the rule itself return it as is
-        if (clipboardText.startsWith("#") || clipboardText.startsWith("b") || clipboardText.startsWith("o") || Character.isDigit(clipboardText.charAt(0))) {
-            System.out.println("clipboard text: " + clipboardText);
+        Pattern pattern = Pattern.compile("^[#bo0-9].*");
+
+        if (pattern.matcher(clipboardText).find()) {
             return clipboardText;
 
             //if the copied text is a URL then return the contents of the URL
@@ -59,16 +58,14 @@ public class RleParser {
             //if the copied text is a URL then return the contents of the link
         } else if (checksIfUrl(clipboardText)) {
             try {
-                URL url = new URL(clipboardText);
-                System.out.println("URL: "+ clipboardText);
-                return IOUtils.toString(url.openStream());
+                InputStream in = new URL(clipboardText).openStream();
+                return IOUtils.toString(in);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
-        System.out.println("No file: " + clipboardText);
-        return file;
+        return "";
 
     }
 
@@ -86,10 +83,7 @@ public class RleParser {
         return Files.exists(path);
     }
 
-    //best way is to make a method called parse, that accepts a String as a parameter and returns an int[][] not a Grid
-    //have to center the design by dividing the length by the dimensions
-    //load the RLE from clipboard, either through filePATH, URL, or content of the file
-    //change dimensions to 100 x 100
+
     public int[][] parse(String file) {
         char letter;
         String strWidth;
@@ -131,11 +125,9 @@ public class RleParser {
                     int commaIndex = line.indexOf(',', i);
                     if (commaIndex == -1) {
                         strHeight = line.substring(i + 3).trim();
-//                        commaIndex = line.length() - 1;
                     } else {
                         strHeight = line.substring(i + 3, commaIndex).trim();
                     }
-//                    strHeight = line.substring(i + 3, commaIndex).trim();
                     height = Integer.parseInt(strHeight);
                     y = (yVal / 2) - (height / 2);
                     break;
