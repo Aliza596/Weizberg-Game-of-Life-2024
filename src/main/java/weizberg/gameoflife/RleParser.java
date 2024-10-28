@@ -69,6 +69,37 @@ public class RleParser {
 
     }
 
+    public String readRlefromString(String clipboardText) {
+
+        //if the copied text is the rule itself return it as is
+        Pattern pattern = Pattern.compile("^[#bo0-9].*");
+
+        if (pattern.matcher(clipboardText).find()) {
+            return clipboardText;
+
+            //if the copied text is a URL then return the contents of the URL
+        } else if (checksIfFile(clipboardText)) {
+            try {
+                System.out.println("File: " + clipboardText);
+                return IOUtils.toString(new FileReader(clipboardText));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            //if the copied text is a URL then return the contents of the link
+        } else if (checksIfUrl(clipboardText)) {
+            try {
+                InputStream in = new URL(clipboardText).openStream();
+                return IOUtils.toString(in);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return "";
+
+    }
+
     private boolean checksIfUrl(String clipboardText) {
         try {
             new URL(clipboardText).toURI();

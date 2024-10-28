@@ -5,6 +5,15 @@ import javax.sound.midi.Soundbank;
 public class Grid {
 
     private int[][] field;
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
     private int height;
     private int width;
 

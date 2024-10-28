@@ -11,6 +11,12 @@ import java.util.Arrays;
 public class GridComponent extends JComponent {
     private Grid grid;
     private int[][] field;
+
+    public int getCellSize() {
+        return cellSize;
+    }
+
+    private int cellSize = 10;
     private Timer timer = new Timer(1000, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -65,7 +71,6 @@ public class GridComponent extends JComponent {
 
         g.setColor(Color.white);
 
-        int cellSize = 10;
         for (int i = 0; i <= getWidth(); i += cellSize) {
             g.drawLine(i, 0, i, getHeight());
         }
@@ -104,12 +109,6 @@ public class GridComponent extends JComponent {
         for (int y = 0; y < field.length; y++) {
             Arrays.fill(field[y], 0);
         }
-        repaint();
-    }
-
-    public void copiedButton() {
-        RleParser rleParser = new RleParser();
-        grid.setField(rleParser.parse(rleParser.readCopiedText()));
         repaint();
     }
 }

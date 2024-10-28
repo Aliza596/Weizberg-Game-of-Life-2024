@@ -2,6 +2,10 @@ package weizberg.gameoflife;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -9,19 +13,21 @@ import java.nio.file.Path;
 
 public class GridFrame extends JFrame {
 
-
     public GridFrame() throws IOException {
+
+        Grid game = new Grid(300, 300);
+        GridComponent gridComponent = new GridComponent(game);
+        GameOfLifeController controller = new GameOfLifeController(game, gridComponent);
+
+
+
         setSize(800, 600);
         setTitle("Conway's Game of Life");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         setLayout(new BorderLayout());
 
-        Grid grid = new Grid(300, 400);
-
-        GridComponent gridComponent = new GridComponent(grid);
         gridComponent.setBackground(Color.BLACK);
-        add(gridComponent, BorderLayout.CENTER);
         JScrollPane scrollPane = new JScrollPane(gridComponent);
         add(scrollPane, BorderLayout.CENTER);
 
@@ -30,6 +36,26 @@ public class GridFrame extends JFrame {
 
         JButton playButton = new JButton("Play");
         buttonPanel.add(playButton);
+
+        gridComponent.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                controller.toggleCell(e.getX(), e.getY());
+            }
+        });
+
+        gridComponent.addMouseMotionListener(new MouseMotionListener() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                controller.toggleCell(e.getX(), e.getY());
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+
+            }
+        });
+        add(gridComponent, BorderLayout.CENTER);
         playButton.addActionListener(e -> gridComponent.playButtonMethod());
 
         JButton pauseButton = new JButton("Pause");
@@ -45,8 +71,10 @@ public class GridFrame extends JFrame {
         clearButton.addActionListener(e -> gridComponent.clearButtonMethod());
 
         JButton copiedButton = new JButton("Paste");
+        copiedButton.addActionListener(e -> {
+            controller.paste("text");
+        });
         add(copiedButton, BorderLayout.EAST);
-        copiedButton.addActionListener(e -> gridComponent.copiedButton());
     }
 
 
