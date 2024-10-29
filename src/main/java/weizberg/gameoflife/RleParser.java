@@ -23,48 +23,9 @@ public class RleParser {
         field = new int[xVal][yVal];
     }
 
-    public String readCopiedText() {
-        String clipboardText = "";
-
-        try {
-            clipboardText = (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
-        } catch (UnsupportedFlavorException | IOException e) {
-            throw new RuntimeException(e);
-        }
-
-
-        //if the copied text is the rule itself return it as is
-        Pattern pattern = Pattern.compile("^[#bo0-9].*");
-
-        if (pattern.matcher(clipboardText).find()) {
-            return clipboardText;
-
-            //if the copied text is a URL then return the contents of the URL
-        } else if (checksIfFile(clipboardText)) {
-            try {
-                return IOUtils.toString(new FileReader(clipboardText));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            //if the copied text is a URL then return the contents of the link
-        } else if (checksIfUrl(clipboardText)) {
-            try {
-                InputStream in = new URL(clipboardText).openStream();
-                return IOUtils.toString(in);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return "";
-
-    }
-
     public int[][] rleToField(String clipboardText) {
         String rle = readRlefromString(clipboardText);
         return parse(rle);
-        //return parse(rle);
     }
 
     public String readRlefromString(String clipboardText) {
@@ -76,11 +37,13 @@ public class RleParser {
                 InputStream in = new URL(clipboardText).openStream();
                 return IOUtils.toString(in);
             } catch (IOException e) {
+                e.printStackTrace();
             }
         } else if (checksIfFile(clipboardText)) {
             try {
                 return IOUtils.toString(new FileReader(clipboardText));
             } catch (IOException e) {
+                e.printStackTrace();
             }
         } else {
             System.out.println("Invalid paste");
@@ -128,7 +91,6 @@ public class RleParser {
 
             for (int i = 0; i < line.length(); i++) {
                 letter = line.charAt(i);
-                System.out.println(letter + " " + i);
 
                 if (letter == 'x') {
                     int commaIndex = line.indexOf(',', i);

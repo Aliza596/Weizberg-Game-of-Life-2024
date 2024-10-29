@@ -17,7 +17,7 @@ public class GridFrame extends JFrame {
 
         Grid game = new Grid(300, 300);
         GridComponent gridComponent = new GridComponent(game);
-        GameOfLifeController controller = new GameOfLifeController(game, gridComponent);
+        final GameOfLifeController controller = new GameOfLifeController(game, gridComponent);
 
 
 

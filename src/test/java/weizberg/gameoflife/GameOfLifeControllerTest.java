@@ -3,14 +3,11 @@ package weizberg.gameoflife;
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
-import java.awt.datatransfer.StringSelection;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 
 import static org.mockito.Mockito.*;
 
@@ -21,7 +18,7 @@ public class GameOfLifeControllerTest {
         //given
         Grid model = mock();
         GridComponent view = mock();
-        GameOfLifeController controller = new GameOfLifeController(model, view);
+        final GameOfLifeController controller = new GameOfLifeController(model, view);
         doReturn(10).when(view).getCellSize();
         doReturn(10).when(model).getWidth();
         doReturn(10).when(model).getHeight();
@@ -39,7 +36,7 @@ public class GameOfLifeControllerTest {
         //given
         Grid model = mock();
         GridComponent view = mock();
-        GameOfLifeController controller = new GameOfLifeController(model, view);
+        final GameOfLifeController controller = new GameOfLifeController(model, view);
         doReturn(10).when(view).getCellSize();
         doReturn(10).when(model).getWidth();
         doReturn(10).when(model).getHeight();
@@ -61,7 +58,7 @@ public class GameOfLifeControllerTest {
         Grid model = mock();
         GridComponent view = mock();
         RleParser rleParser = mock();
-        GameOfLifeController controller = new GameOfLifeController(model, view, rleParser);
+        final GameOfLifeController controller = new GameOfLifeController(model, view, rleParser);
 
         int[][] mockedField = new int[100][100];
         mockedField[49][50] = 1;
@@ -83,11 +80,11 @@ public class GameOfLifeControllerTest {
         verify(model).setField(argThat(field -> {
             for (int y = 0; y < field.length; y++) {
                 for (int x = 0; x < field[y].length; x++) {
-                    if ((y == 49 && x == 50) ||
-                            (y == 50 && x == 51) ||
-                            (y == 51 && x == 49) ||
-                            (y == 51 && x == 50) ||
-                            (y == 51 && x == 51)) {
+                    if ((y == 49 && x == 50)
+                            || (y == 50 && x == 51)
+                            || (y == 51 && x == 49)
+                            || (y == 51 && x == 50)
+                            || (y == 51 && x == 51)) {
                         if (field[y][x] != 1) {
                             return false;
                         }
@@ -111,14 +108,7 @@ public class GameOfLifeControllerTest {
         Grid model = mock();
         GridComponent view = mock();
         RleParser rleParser = mock();
-        GameOfLifeController controller = new GameOfLifeController(model, view, rleParser);
-
-        int[][] mockedField = new int[100][100];
-        mockedField[49][50] = 1;
-        mockedField[50][51] = 1;
-        mockedField[51][49] = 1;
-        mockedField[51][50] = 1;
-        mockedField[51][51] = 1;
+        final GameOfLifeController controller = new GameOfLifeController(model, view, rleParser);
 
         //When
         String content = """
@@ -135,11 +125,11 @@ public class GameOfLifeControllerTest {
         verify(model).setField(argThat(field -> {
             for (int y = 0; y < field.length; y++) {
                 for (int x = 0; x < field[y].length; x++) {
-                    if ((y == 49 && x == 50) ||
-                            (y == 50 && x == 51) ||
-                            (y == 51 && x == 49) ||
-                            (y == 51 && x == 50) ||
-                            (y == 51 && x == 51)) {
+                    if ((y == 49 && x == 50)
+                            || (y == 50 && x == 51)
+                            || (y == 51 && x == 49)
+                            || (y == 51 && x == 50)
+                            || (y == 51 && x == 51)) {
                         if (field[y][x] != 1) {
                             return false;
                         }
@@ -165,14 +155,7 @@ public class GameOfLifeControllerTest {
         Grid model = mock();
         GridComponent view = mock();
         RleParser rleParser = mock();
-        GameOfLifeController controller = new GameOfLifeController(model, view, rleParser);
-
-        int[][] mockedField = new int[100][100];
-        mockedField[49][50] = 1;
-        mockedField[50][51] = 1;
-        mockedField[51][49] = 1;
-        mockedField[51][50] = 1;
-        mockedField[51][51] = 1;
+        final GameOfLifeController controller = new GameOfLifeController(model, view, rleParser);
 
         //When
         File file = new File(getClass().getClassLoader().getResource("gliderFile.rle").toURI());
@@ -182,11 +165,11 @@ public class GameOfLifeControllerTest {
         verify(model).setField(argThat(field -> {
             for (int y = 0; y < field.length; y++) {
                 for (int x = 0; x < field[y].length; x++) {
-                    if ((y == 49 && x == 50) ||
-                            (y == 50 && x == 51) ||
-                            (y == 51 && x == 49) ||
-                            (y == 51 && x == 50) ||
-                            (y == 51 && x == 51)) {
+                    if ((y == 49 && x == 50)
+                            || (y == 50 && x == 51)
+                            || (y == 51 && x == 49)
+                            || (y == 51 && x == 50)
+                            || (y == 51 && x == 51)) {
                         if (field[y][x] != 1) {
                             return false;
                         }

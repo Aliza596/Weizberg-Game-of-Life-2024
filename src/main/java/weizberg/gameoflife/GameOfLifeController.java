@@ -38,6 +38,7 @@ public class GameOfLifeController {
     public void pasteText() {
         paste(openCopiedText());
     }
+
     public void paste(String clipboardContents) {
         RleParser rleParser = new RleParser();
         int[][] rleField = rleParser.rleToField(clipboardContents);
