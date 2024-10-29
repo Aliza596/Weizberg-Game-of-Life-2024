@@ -3,9 +3,7 @@ package weizberg.gameoflife;
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -21,9 +19,6 @@ public class RleParser {
     private final int xVal = 100;
     private final int yVal = 100;
 
-    //use apche instead of file.readString()
-    //String wholeFile = IOUtils.toString(new FileReader(filePath));
-    // ^^ this sets the entire file/url/anything as a string
     public RleParser() {
         field = new int[xVal][yVal];
     }
@@ -33,9 +28,7 @@ public class RleParser {
 
         try {
             clipboardText = (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
-        } catch (UnsupportedFlavorException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (UnsupportedFlavorException | IOException e) {
             throw new RuntimeException(e);
         }
 
@@ -49,7 +42,6 @@ public class RleParser {
             //if the copied text is a URL then return the contents of the URL
         } else if (checksIfFile(clipboardText)) {
             try {
-                System.out.println("File: " + clipboardText);
                 return IOUtils.toString(new FileReader(clipboardText));
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -69,35 +61,32 @@ public class RleParser {
 
     }
 
+    public int[][] rleToField(String clipboardText) {
+        String rle = readRlefromString(clipboardText);
+        return parse(rle);
+        //return parse(rle);
+    }
+
     public String readRlefromString(String clipboardText) {
-
-        //if the copied text is the rule itself return it as is
         Pattern pattern = Pattern.compile("^[#bo0-9].*");
-
         if (pattern.matcher(clipboardText).find()) {
             return clipboardText;
-
-            //if the copied text is a URL then return the contents of the URL
-        } else if (checksIfFile(clipboardText)) {
-            try {
-                System.out.println("File: " + clipboardText);
-                return IOUtils.toString(new FileReader(clipboardText));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            //if the copied text is a URL then return the contents of the link
         } else if (checksIfUrl(clipboardText)) {
             try {
                 InputStream in = new URL(clipboardText).openStream();
                 return IOUtils.toString(in);
             } catch (IOException e) {
-                e.printStackTrace();
             }
+        } else if (checksIfFile(clipboardText)) {
+            try {
+                return IOUtils.toString(new FileReader(clipboardText));
+            } catch (IOException e) {
+            }
+        } else {
+            System.out.println("Invalid paste");
         }
 
         return "";
-
     }
 
     private boolean checksIfUrl(String clipboardText) {
@@ -113,7 +102,6 @@ public class RleParser {
         Path path = Paths.get(clipboardText);
         return Files.exists(path);
     }
-
 
     public int[][] parse(String file) {
         char letter;
@@ -133,19 +121,16 @@ public class RleParser {
 
         for (int j = 0; j < lines.length; j++) {
             line = lines[j];
+
+            if (line.startsWith("#")) {
+                continue;
+            }
+
             for (int i = 0; i < line.length(); i++) {
                 letter = line.charAt(i);
+                System.out.println(letter + " " + i);
 
-                //sets the name of the design
-                if (letter == '#' && i + 1 <= line.length()) {
-                    if (line.charAt(i + 1) == 'N') {
-                        title = line.substring(3);
-                        break;
-                    } else if (line.charAt(i + 1) == 'C' || line.charAt(i + 1) == 'c') {
-                        comment += line.substring(3);
-                        break;
-                    }
-                } else if (letter == 'x') {
+                if (letter == 'x') {
                     int commaIndex = line.indexOf(',', i);
                     strWidth = line.substring(i + 3, commaIndex).trim();
                     width = Integer.parseInt(strWidth);
@@ -186,6 +171,7 @@ public class RleParser {
                 }
             }
         }
+
 
         return field;
     }

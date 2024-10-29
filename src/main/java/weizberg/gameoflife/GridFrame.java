@@ -56,11 +56,11 @@ public class GridFrame extends JFrame {
             }
         });
         add(gridComponent, BorderLayout.CENTER);
-        playButton.addActionListener(e -> gridComponent.playButtonMethod());
+        playButton.addActionListener(e -> controller.timerOn());
 
         JButton pauseButton = new JButton("Pause");
         buttonPanel.add(pauseButton);
-        pauseButton.addActionListener(e -> gridComponent.pauseButtonMethod());
+        pauseButton.addActionListener(e -> controller.timerOff());
 
         JButton nextButton = new JButton("Next");
         buttonPanel.add(nextButton);
@@ -72,7 +72,7 @@ public class GridFrame extends JFrame {
 
         JButton copiedButton = new JButton("Paste");
         copiedButton.addActionListener(e -> {
-            controller.paste("text");
+            controller.pasteText();
         });
         add(copiedButton, BorderLayout.EAST);
     }

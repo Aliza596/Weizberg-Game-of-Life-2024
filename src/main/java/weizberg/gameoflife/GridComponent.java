@@ -9,58 +9,17 @@ import java.awt.event.MouseListener;
 import java.util.Arrays;
 
 public class GridComponent extends JComponent {
-    private Grid grid;
+    private final Grid grid;
     private int[][] field;
 
     public int getCellSize() {
         return cellSize;
     }
 
-    private int cellSize = 10;
-    private Timer timer = new Timer(1000, new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            grid.nextGen();
-            repaint();
-        }
-    });
+    private final int cellSize = 10;
 
     public GridComponent(Grid grid) {
         this.grid = grid;
-        addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                int gridX = e.getX() / 20;
-                int gridY = e.getY() / 20;
-
-                if (grid.isAlive(gridX, gridY)) {
-                    grid.makeDead(gridX, gridY);
-                } else {
-                    grid.makeAlive(gridX, gridY);
-                }
-                repaint();
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
     }
 
     @Override
@@ -90,14 +49,6 @@ public class GridComponent extends JComponent {
                 }
             }
         }
-    }
-
-    public void playButtonMethod() {
-        timer.start();
-    }
-
-    public void pauseButtonMethod() {
-        timer.stop();
     }
 
     public void nextGenMethod() {
