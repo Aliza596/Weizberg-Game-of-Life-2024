@@ -75,7 +75,6 @@ public class GridFrame extends JFrame {
             controller.pasteText();
         });
         buttonPanel.add(copiedButton);
-//        add(copiedButton, BorderLayout.EAST);
     }
 
 

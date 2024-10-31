@@ -29,8 +29,6 @@ public class RleParser {
         String strHeight;
         String strNum;
         String line;
-        String title;
-        String comment = "";
         int height;
         int width;
         int startingPointX = 0;
@@ -56,7 +54,6 @@ public class RleParser {
                     x = startingPointX = (xVal / 2) - (width / 2);
                     i = commaIndex - 1;
                 } else if (letter == 'y') {
-                    System.out.println("Y: " + line);
                     int commaIndex = line.indexOf(',', i);
                     if (commaIndex == -1) {
                         strHeight = line.substring(i + 3).trim();
