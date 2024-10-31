@@ -23,49 +23,6 @@ public class RleParser {
         field = new int[xVal][yVal];
     }
 
-    public int[][] rleToField(String clipboardText) {
-        String rle = readRlefromString(clipboardText);
-        return parse(rle);
-    }
-
-    public String readRlefromString(String clipboardText) {
-        Pattern pattern = Pattern.compile("^[#bo0-9].*");
-        if (pattern.matcher(clipboardText).find()) {
-            return clipboardText;
-        } else if (checksIfUrl(clipboardText)) {
-            try {
-                InputStream in = new URL(clipboardText).openStream();
-                return IOUtils.toString(in);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else if (checksIfFile(clipboardText)) {
-            try {
-                return IOUtils.toString(new FileReader(clipboardText));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("Invalid paste");
-        }
-
-        return "";
-    }
-
-    private boolean checksIfUrl(String clipboardText) {
-        try {
-            new URL(clipboardText).toURI();
-            return true;
-        } catch (MalformedURLException | URISyntaxException e) {
-            return false;
-        }
-    }
-
-    private boolean checksIfFile(String clipboardText) {
-        Path path = Paths.get(clipboardText);
-        return Files.exists(path);
-    }
-
     public int[][] parse(String file) {
         char letter;
         String strWidth;
